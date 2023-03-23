@@ -3,6 +3,7 @@ package org.example;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,7 +22,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FirstScriptTest {
+public class FirstTestCase {
     private WebDriver driver;
 
     @BeforeAll
@@ -36,33 +37,17 @@ public class FirstScriptTest {
         driver = new ChromeDriver(options);
     }
 
-    @AfterEach
-    void teardown() {
-        driver.quit();
-    }
 
     @Test
     @Description("Some detailed test description")
     public void firstTestCase() throws IOException {
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+        driver.get("https://www.google.ru/");
+        driver.manage().window().maximize();
 
-        String title = driver.getTitle();
-        assertEquals("Web form", title);
+        WebElement search = driver.findElement(By.className("gLFyf"));
+        search.sendKeys(new CharSequence[]{"youtube"});
+        search.sendKeys(Keys.ENTER);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        WebElement textBox = driver.findElement(By.name("my-text"));
-        textBox.sendKeys("Selenium");
-
-        InputStream targetStream = new FileInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-        Allure.addAttachment("ResultScreen", targetStream);
-
-        WebElement submitButton = driver.findElement(By.cssSelector("button"));
-
-        submitButton.click();
-
-        WebElement message = driver.findElement(By.id("message"));
-        String value = message.getText();
-        assertEquals("Received!", value);
     }
 }
