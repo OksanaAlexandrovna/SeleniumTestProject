@@ -8,20 +8,20 @@ public class Artifact {
     int century;
 
     // для артефактов, где известен только порядковый номер
-    public void Artifact() {
+    public Artifact() {
         count++;
         System.out.println("Номер:" + count);
     }
 
     // для артефактов, где известен номер и культура, которой он был создан
-    public void Artifact(String culture) {
+    public Artifact(String culture) {
         this.count = count;
         this.culture = culture;
         count++;
         System.out.println("Номер:" + "Культура:" + count + culture);
     }
     // для артефактов, где известен номер и культура и век, в которой он был создан
-    public void Artifact(String culture, int century) {
+    public Artifact(String culture, int century) {
         this.count = count;
         this.culture = culture;
         this.century = century;
@@ -29,9 +29,10 @@ public class Artifact {
         System.out.println("Номер:" + "Культура:" + count + culture + "Век:" + century);
     }
     public static void main(java.lang.String[] args) {
-        Artifact TARDIS = new Artifact();
-        Artifact Dinosaur = new Artifact("aztek");
-        Artifact Papyrus = new Artifact("yegipet", 3);
+        Artifact tardis = new Artifact();
+        Artifact dinosaur = new Artifact("aztek");
+        Artifact papyrus = new Artifact("yegipet", 3);
+        System.out.println(tardis.count);
     }
 }
 
